@@ -26,8 +26,11 @@ app.get('*', (req, res) => {
 /**
  * Get port from environment and store in Express.
  */
-const port = process.env.PORT || '3000';
+const port = process.env.BURROWUI_PORT || '3000';
 app.set('port', port);
+
+const host = process.env.BURROWUI_HOST || '0.0.0.0';
+app.set('host', host);
 
 /**
  * Create HTTP server.
@@ -35,7 +38,7 @@ app.set('port', port);
 const server = http.createServer(app);
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Listen on provided port and provided host.
  */
-server.listen(port, () => console.log(`API running on localhost:${port}`)
+server.listen(port, host, () => console.log(`API running on ${host}:${port}`)
 );
